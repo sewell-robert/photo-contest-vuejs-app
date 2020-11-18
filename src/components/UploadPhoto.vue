@@ -155,13 +155,13 @@ li {
 a {
   color: #42b983;
 }
-.component-background {
+/* .component-background {
   background-image: url("https://photocontestblob.blob.core.windows.net/photocontestblob/white-brick.png");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
   padding: 25px 0px 0px 0px;
-}
+} */
 .alert-style-props {
   margin: 0px 10px 10px 10px;
 }

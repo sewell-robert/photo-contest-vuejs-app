@@ -12,6 +12,8 @@ Vue.config.productionTip = false
 
 Axios.defaults.baseURL = process.env.API_ENDPOINT
 
+Vue.use(router)
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

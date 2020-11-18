@@ -28,7 +28,7 @@
       </v-carousel-item>
     </v-carousel>
 
-    <div style="width: 100%; height: 800px;"></div>
+    <!-- <div style="width: 100%; height: 800px;"></div> -->
   </div>
 </template>
 
@@ -53,10 +53,10 @@ export default {
 </script>
 
 <style scoped>
-.component-background {
+/* .component-background {
   background-image: url("https://photocontestblob.blob.core.windows.net/photocontestblob/white-brick.png");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
-}
+} */
 </style>
