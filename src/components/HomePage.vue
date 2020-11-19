@@ -1,9 +1,11 @@
 <template>
   <div class="component-background">
+    <h2>Weekly Winners<br/>(and runners-up)</h2>
     <v-carousel
       cycle
       hide-delimiters
       hide-delimiter-background
+      :show-arrows="false"
     >
       <v-carousel-item
         v-for='result in results'
@@ -20,28 +22,29 @@
             align="center"
             justify="center"
           >
-            <div>
-              <img :src="result.imgUrl" width="100%" height="auto">
-            </div>
+            <v-card>
+              <img :src="result.imgUrlLowQuality" width="100%" height="auto">
+              <v-card-title>{{ result.author }}</v-card-title>
+              <!-- <v-card-text>
+                Congrats!
+              </v-card-text> -->
+            </v-card>
           </v-row>
         </v-sheet>
       </v-carousel-item>
     </v-carousel>
-
-    <!-- <div style="width: 100%; height: 800px;"></div> -->
   </div>
 </template>
 
 <script>
-import UploadService from '@/api-services/upload.service'
+import HomePageService from '@/api-services/homepage.service'
 
 export default {
   name: 'HomePage',
   created () {
-    UploadService.getAll()
+    HomePageService.getWeeklyWinners()
       .then((response) => {
         this.results = response.data
-        console.log(this.results)
       })
   },
   data () {
@@ -59,4 +62,8 @@ export default {
   background-attachment: fixed;
   background-size: cover;
 } */
+h2 {
+  color: black;
+  font-family: 'Permanent Marker', cursive;
+}
 </style>

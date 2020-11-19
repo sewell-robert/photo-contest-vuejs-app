@@ -1,5 +1,6 @@
 <template>
   <div class="component-background">
+    <h5>(tap on a photo to open it up)</h5>
     <div class="row-style-props">
       <v-row>
         <v-col
@@ -123,14 +124,12 @@
         @input="nextPage()"
       ></v-pagination>
     </div>
-
-    <!-- <div style="width: 100%; height: 800px;"></div> -->
   </div>
 </template>
 
 <script>
 import UploadService from '@/api-services/upload.service'
-import VoterBoxService from '@/api-services/voterBox.service'
+import VoterBoxService from '@/api-services/voterbox.service'
 
 export default {
   name: 'VoterBox',
@@ -152,29 +151,43 @@ export default {
       }
     },
     storeVote () {
-      this.isLiked = true
-
       // This axios call is here for testing only
-      VoterBoxService.storeOneVote(this.photo.id)
-        .then((response) => {
-          this.photo.votes = response.data
-        })
+      // VoterBoxService.storeOneVote(this.photo.id)
+      //   .then((response) => {
+      //     this.photo.votes = response.data
+      //   })
 
       var newDate = new Date()
       var todaysDt = newDate.getDate()
+      console.log('Todays Date: ' + todaysDt)
 
       if (localStorage.getItem('date')) {
         var date = localStorage.getItem('date')
+        console.log('Last Vote Date: ' + date)
 
         if (date < todaysDt) {
+          this.isLiked = true
           VoterBoxService.storeOneVote(this.photo.id)
             .then((response) => {
               this.photo.votes = response.data
             })
-          // localStorage.setItem('date', todaysDt)
-          // localStorage.setItem('photoId', this.photo.id)
-          console.log('Store vote 2')
+          localStorage.setItem('date', todaysDt)
+          localStorage.setItem('photoId', this.photo.id)
+
+          var setDate = localStorage.getItem('date')
+          var setId = localStorage.getItem('photoId')
+          console.log('New Vote Date: ' + setDate + ' ' + setId)
         }
+      } else {
+        this.isLiked = true
+        VoterBoxService.storeOneVote(this.photo.id)
+          .then((response) => {
+            this.photo.votes = response.data
+          })
+        localStorage.setItem('date', todaysDt)
+        localStorage.setItem('photoId', this.photo.id)
+
+        console.log('No local storage data was available. Vote stored.')
       }
     }
   },
@@ -232,5 +245,9 @@ export default {
 } */
 .heart-icon-btn {
   margin-right: 15px;
+}
+h5 {
+  color: black;
+  font-family: 'Permanent Marker', cursive;
 }
 </style>

@@ -32,7 +32,7 @@
         </v-card>
       </div>
 
-      <div>
+      <div class="submit-button">
         <v-btn
           elevation="2"
           width="75%"
@@ -45,12 +45,11 @@
           v-on:click="submitFile()"
         >Submit Photo</v-btn>
       </div>
-
+      <h5>(this may take a minute)</h5>
       <!-- <button v-on:click="submitFile()">Submit</button> -->
 
       <!-- <input type="file" accept="image/*" @change="uploadImage($event)" id="file-input"> -->
     </div>
-    <div style="width: 100%; height: 1000px;"></div>
   </div>
 </template>
 
@@ -60,16 +59,9 @@ import UploadService from '@/api-services/upload.service'
 export default {
   name: 'UploadPhoto',
   props: {
-    test: String,
-    isActive: false
+
   },
   methods: {
-    // uploadImage(event) {
-    //   // eslint-disable-next-line no-console
-    //   // console.log(event);
-    //   // eslint-disable-next-line no-console
-    //   console.log(event.target.files[0]);
-    //   this.isActive = true;
     handleFileUpload () {
       this.uploadedImage = this.$refs.file.files[0]
     },
@@ -91,7 +83,7 @@ export default {
       }
 
       UploadService.postOneImage(formData, config).then(response => {
-        this.image = response.data.imgUrl
+        this.image = response.data.imgUrlHighQuality
         this.author = response.data.author
         this.index = response.data.id
         this.isImageSaved = true
@@ -184,5 +176,12 @@ a {
 }
 .card-style-props {
   padding-bottom: 10px;
+}
+.submit-button {
+  padding-bottom: 5px;
+}
+h5 {
+  color: black;
+  font-family: 'Permanent Marker', cursive;
 }
 </style>
