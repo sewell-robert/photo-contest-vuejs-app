@@ -11,7 +11,6 @@
         >
           <div class="text-center">
             <v-dialog
-              persistent
               v-model="dialog"
               :retain-focus="false"
             >
@@ -75,7 +74,7 @@
                   </div>
                 </v-img>
                 <v-card-actions>
-                  <v-card-subtitle>{{ photo.votes }} Votes</v-card-subtitle>
+                  <v-card-subtitle class="card-subtitle">{{ photo.votes }} Votes</v-card-subtitle>
 
                   <v-spacer></v-spacer>
 
@@ -86,7 +85,7 @@
                   >
                     <div v-if="isLiked">
                       <v-icon
-                        color="red"
+                        color="#ff0000"
                         v-on:click="storeVote()"
                       >
                         mdi-heart
@@ -94,6 +93,7 @@
                     </div>
                     <div v-else>
                       <v-icon
+                        large
                         v-on:click="storeVote()"
                       >
                         mdi-heart
@@ -105,7 +105,7 @@
                     icon
                     @click="dialog = false, isLiked = false"
                   >
-                    <v-icon>mdi-close</v-icon>
+                    <v-icon large>mdi-close</v-icon>
                   </v-btn>
                 </v-card-actions>
               </v-card>
@@ -115,12 +115,14 @@
       </v-row>
     </div>
 
-    <div class="text-center pagination-style-props">
+    <div class="text-center pagination-container">
       <v-pagination
         v-model="page"
         :length="paginationLength"
         circle
-        color="#bfb7aa"
+        dark
+        color="#ff0000"
+        class="pagination-style-props"
         @input="nextPage()"
       ></v-pagination>
     </div>
@@ -239,12 +241,18 @@ export default {
   padding-left: 15px;
   width: auto;
 }
-.pagination-style-props {
+.pagination-container {
   padding-left: 15px;
   width: auto;
 } */
+/* .pagination-style-props {
+  background-image: linear-gradient(to bottom right, #750000, #ff0000);
+} */
+.card-subtitle {
+  font-size: larger;
+}
 .heart-icon-btn {
-  margin-right: 15px;
+  margin-right: 25px;
 }
 h5 {
   color: black;

@@ -1,15 +1,15 @@
 <template>
   <div class="component-background">
     <div>
-      <v-alert
+      <!-- <v-alert
         v-if="isImageSaved"
         dense
         type="success"
         class="alert-style-props"
-      >Photo successfully saved!</v-alert>
+      >Photo successfully saved!</v-alert> -->
 
       <v-card
-        elevation="20"
+        elevation="5"
         class="image-container"
       ><img :src="image" width="100%" height="auto" class="image-style-props"><br /></v-card>
 
@@ -32,20 +32,52 @@
         </v-card>
       </div>
 
-      <div class="submit-button">
+      <div class="submit-button-container">
         <v-btn
           elevation="2"
           width="75%"
           rounded
           fab
-          color="#bfb7aa"
+          dark
+          color="#ff0000"
           :loading="isImageSaving"
           :disabled="isImageSaving"
           class="submit-photo-btn"
           v-on:click="submitFile()"
         >Submit Photo</v-btn>
       </div>
+
       <h5>(this may take a minute)</h5>
+
+      <template>
+        <div class="text-center ma-2">
+          <!-- <v-btn
+            dark
+            @click="isImageSaved = true"
+          >
+            Open Snackbar
+          </v-btn> -->
+          <v-snackbar
+            v-model="isImageSaved"
+          >
+            Photo successfully saved!
+
+            <template v-slot:action="{ attrs }">
+              <v-btn
+                color="#12c718"
+                text
+                multi-line
+                timeout="10000"
+                v-bind="attrs"
+                @click="isImageSaved = false"
+              >
+                Close
+              </v-btn>
+            </template>
+          </v-snackbar>
+        </div>
+      </template>
+
       <!-- <button v-on:click="submitFile()">Submit</button> -->
 
       <!-- <input type="file" accept="image/*" @change="uploadImage($event)" id="file-input"> -->
@@ -171,15 +203,19 @@ a {
   display: inline-block;
   margin: 15px 0px 15px 0px;
 }
-.image-container {
+/* .image-container {
   margin: 0px 15px 0px 15px;
-}
+} */
 .card-style-props {
   padding-bottom: 10px;
 }
-.submit-button {
+.submit-button-container {
   padding-bottom: 5px;
+  /* color="#bfb7aa" */
 }
+/* .submit-photo-btn {
+  background-color: red;
+} */
 h5 {
   color: black;
   font-family: 'Permanent Marker', cursive;

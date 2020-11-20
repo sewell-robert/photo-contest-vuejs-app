@@ -12,7 +12,7 @@
             justify="center"
           >
             <v-btn
-              class="mx-2"
+              class="mx-2 menu-btn"
               color="#bfb7aa"
               fab
               dark
@@ -111,6 +111,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+.menu-btn {
+  background-image: linear-gradient(to bottom right, #750000, #ff0000);
 }
 .router-link-active {
   color: red;
